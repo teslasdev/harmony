@@ -5,6 +5,7 @@ import './App.css';
 import {ResponseInterface} from "../PromptResponseList/response-interface";
 import PromptResponseList from "../PromptResponseList/PromptResponseList";
 import {IoFlashSharp} from 'react-icons/io5'
+import {FaBars} from 'react-icons/fa'
 import Navigation from './Navigation';
 
 type ModelValueType = 'gpt' | 'codex' | 'image';
@@ -146,15 +147,25 @@ const Home = () => {
     }
   }
 
+
+  const [isOpen, setOpen] = useState(true)
+
   return (
     <div className="App">
       <div className='header-box'>
         <header className='header'>
+          <div className='pr-4 d-mobile' onClick={() => setOpen(!isOpen)}>
+            <FaBars color="white" size={20} />
+          </div>
           <h3 className='logo-name'>Harmony Ai</h3>
         </header>
       </div>
-
       <div className='flex flex-center'>
+        {!isOpen && 
+          <div className='bg-absolute-black'>
+            <Navigation />
+          </div>
+        }
         <div className='flex-10 sidebar d-sm-none'>
           <Navigation />
         </div>

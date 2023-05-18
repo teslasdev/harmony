@@ -2,28 +2,31 @@ import {useState} from 'react';
 import axios from "axios";
 import PromptInput from "../PromptInput/PromptInput";
 import './App.css';
-import { FaUserCircle } from 'react-icons/fa'
-import {BsSendFill} from 'react-icons/bs'
-import {FiHelpCircle} from 'react-icons/fi'
-import {AiTwotonePhone} from 'react-icons/ai'
-import {IoFlashSharp} from 'react-icons/io5'
+import {FaBars} from 'react-icons/fa'
 import Navigation from './Navigation';
 
 const Mission = () => {
 
-
+  const [isOpen, setOpen] = useState(true)
   return (
     <div className="App">
-      <div className='header-box'>
-        <header className='header'>
-          <h3 className='logo-name'>Harmony Ai</h3>
-        </header>
-      </div>
-
-      <div className='flex flex-center h-70%'>
-        <div className='flex-10 sidebar d-sm-none'>
+    <div className='header-box'>
+      <header className='header'>
+        <div className='pr-4 d-mobile' onClick={() => setOpen(!isOpen)}>
+          <FaBars color="white" size={20} />
+        </div>
+        <h3 className='logo-name'>Harmony Ai</h3>
+      </header>
+    </div>
+    <div className='flex flex-center'>
+      {!isOpen && 
+        <div className='bg-absolute-black'>
           <Navigation />
         </div>
+      }
+      <div className='flex-10 sidebar d-sm-none'>
+        <Navigation />
+      </div>
         <div className='flex-100' style={{justifyContent:'center'}}>
           <div className='box-container'>
             <div className="box-content">

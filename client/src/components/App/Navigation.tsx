@@ -10,10 +10,9 @@ const Navigation = () => {
   return (
     <>
       <ul className='p-4'>
-         <li className='flex d-items'><FaUserCircle className='d-white' size={20} /> <Link to="/sign-up">Login/Sign Up</Link></li>
+         <li className='flex d-items'><FaUserCircle className='d-white' size={20} /> <Link to="/">Home</Link></li>
          <li className='flex d-items'><BsSendFill size={20} /> <Link to="/our-mission">Our Mission</Link></li>
          <li className='flex d-items'><FiHelpCircle size={20} /> <Link to="/about-us">About Us</Link></li>
-         <li className='flex d-items'><AiTwotonePhone size={20} /> <Link to="/contact-us">Contact Us</Link></li>
       </ul>
     </>
   )
