@@ -160,7 +160,7 @@ const Home = () => {
           <h3 className='logo-name'>Harmony Ai</h3>
         </header>
       </div>
-      <div className='flex flex-center'>
+      <div className='content-box'>
         {!isOpen && 
           <div className='bg-absolute-black'>
             <Navigation />
@@ -169,70 +169,74 @@ const Home = () => {
         <div className='flex-10 sidebar d-sm-none'>
           <Navigation />
         </div>
-        <div className='flex-100 h-70'>
-          {!preView && 
-          <div className='box-container'>
-            <div className="box-content">
-              <h3 className='logo-name'>Harmony Ai</h3>
-              <p>Hello there! I'm an AI trained in AI development and I'm here to offer you free AI development services for a limited time. Whether you need assistance with building a custom AI model, creating a chatbot, or any other AI-related project, I'm here to help.</p>
-            </div>
-
-            <div className='flex d-col'>
-              <div className='flex gap-10'>
-                <div className='box-half'>
-                  <span className='badge'><IoFlashSharp size={20}/></span>
-                  Are there any hidden costs or obligations associated with the free services
-                </div>
-
-                <div className='box-half'>
-                  <span className='badge'><IoFlashSharp size={20}/></span>
-                  What is the typical turnaround time for completing an AI project
-                </div>
+        <div className='flex-100'>
+          <div className='editor-box'>
+            {!preView && 
+            <div className='box-container'>
+              <div className="box-content">
+                <h3 className='logo-name'>Harmony Ai</h3>
+                <p>Hello there! I'm an AI trained in AI development and I'm here to offer you free AI development services for a limited time. Whether you need assistance with building a custom AI model, creating a chatbot, or any other AI-related project, I'm here to help.</p>
               </div>
 
+              <div className='flex box-content-sub'>
+                <div className='flex gap-10'>
+                  <div className='box-half'>
+                    <span className='badge'><IoFlashSharp size={20}/></span>
+                    Are there any hidden costs or obligations associated with the free services
+                  </div>
 
-              <div className='flex gap-10'>
-                <div className='box-half'>
-                  <span className='badge'><IoFlashSharp size={20}/></span>
-                  Who is eligible for the free AI development services
+                  <div className='box-half'>
+                    <span className='badge'><IoFlashSharp size={20}/></span>
+                    What is the typical turnaround time for completing an AI project
+                  </div>
                 </div>
 
-                <div className='box-half'>
-                  <span className='badge'><IoFlashSharp size={20}/></span>
-                  What types of AI projects do you support
+
+                <div className='flex gap-10'>
+                  <div className='box-half'>
+                    <span className='badge'><IoFlashSharp size={20}/></span>
+                    Who is eligible for the free AI development services
+                  </div>
+
+                  <div className='box-half'>
+                    <span className='badge'><IoFlashSharp size={20}/></span>
+                    What types of AI projects do you support
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          }
-          <div id="response-list">
+            }
+            <div id="response-list">
             <PromptResponseList responseList={responseList} key="response-list"/>
-          </div>
-          { uniqueIdToRetry &&
-            (<div id="regenerate-button-container">
-              <button id="regenerate-response-button" className={isLoading ? 'loading' : ''} onClick={() => regenerateResponse()}>
-                Regenerate Response
-              </button>
             </div>
-            )
-          }
-          <div id="model-select-container">
-            <label htmlFor="model-select">Select model:</label>
-            <select id="model-select" value={modelValue} onChange={(event) => setModelValue(event.target.value as ModelValueType)}>
-              <option value="gpt">GPT-3 (Understand and generate natural language )</option>
-              <option value="codex">Codex (Understand and generate code, including translating natural language to code)
-              </option>
-              <option value="image">Create Image (Create AI image using DALL·E models)</option>
-            </select>
+            { uniqueIdToRetry &&
+              (<div id="regenerate-button-container">
+                <button id="regenerate-response-button" className={isLoading ? 'loading' : ''} onClick={() => regenerateResponse()}>
+                  Regenerate Response
+                </button>
+              </div>
+              )
+            }
           </div>
-          <div id="input-container">
-            <PromptInput
-              prompt={prompt}
-              onSubmit={() => getGPTResult()}
-              key="prompt-input"
-              updatePrompt={(prompt) => setPrompt(prompt)}
-            />
-            <button id="submit-button" className={isLoading ? 'loading' : ''} onClick={() => getGPTResult()}></button>
+          <div className='prompt-box'>
+            <div id="model-select-container">
+              <label htmlFor="model-select">Select model:</label>
+              <select id="model-select" value={modelValue} onChange={(event) => setModelValue(event.target.value as ModelValueType)}>
+                <option value="gpt">GPT-3 (Understand and generate natural language )</option>
+                <option value="codex">Codex (Understand and generate code, including translating natural language to code)
+                </option>
+                <option value="image">Create Image (Create AI image using DALL·E models)</option>
+              </select>
+            </div>
+            <div id="input-container">
+              <PromptInput
+                prompt={prompt}
+                onSubmit={() => getGPTResult()}
+                key="prompt-input"
+                updatePrompt={(prompt) => setPrompt(prompt)}
+              />
+              <button id="submit-button" className={isLoading ? 'loading' : ''} onClick={() => getGPTResult()}></button>
+            </div>
           </div>
         </div>
       </div>
