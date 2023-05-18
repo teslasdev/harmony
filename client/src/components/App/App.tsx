@@ -4,11 +4,17 @@ import PromptInput from "../PromptInput/PromptInput";
 import './App.css';
 import {ResponseInterface} from "../PromptResponseList/response-interface";
 import PromptResponseList from "../PromptResponseList/PromptResponseList";
+import { FaUserCircle } from 'react-icons/fa'
+import {BsSendFill} from 'react-icons/bs'
+import {FiHelpCircle} from 'react-icons/fi'
+import {AiTwotonePhone} from 'react-icons/ai'
+import {IoFlashSharp} from 'react-icons/io5'
 
 type ModelValueType = 'gpt' | 'codex' | 'image';
 const App = () => {
 
   const [responseList, setResponseList] = useState<ResponseInterface[]>([]);
+  const [preView, setPreview] = useState<Boolean>(false);
   const [prompt, setPrompt] = useState<string>('');
   const [promptToRetry, setPromptToRetry] = useState<string | null>(null);
   const [uniqueIdToRetry, setUniqueIdToRetry] = useState<string | null>(null);
@@ -91,6 +97,8 @@ const App = () => {
       return;
     }
 
+    setPreview(true);
+
     setIsLoading(true);
 
     // Clear the prompt input
@@ -143,34 +151,87 @@ const App = () => {
 
   return (
     <div className="App">
-      <div id="response-list">
-        <PromptResponseList responseList={responseList} key="response-list"/>
+      <div>
+        <header className='header'>
+          <h3 className='logo-name'>Harmony Ai</h3>
+        </header>
       </div>
-      { uniqueIdToRetry &&
-        (<div id="regenerate-button-container">
-          <button id="regenerate-response-button" className={isLoading ? 'loading' : ''} onClick={() => regenerateResponse()}>
-            Regenerate Response
-          </button>
+
+      <div className='flex flex-center'>
+        <div className='flex-10 sidebar d-sm-none'>
+          <ul className='p-4'>
+            <li className='flex d-items'><FaUserCircle className='d-white' size={20} /> <a href="">Login/Sign Up</a></li>
+            <li className='flex d-items'><BsSendFill size={20} /> <a href=''>Our Mission</a></li>
+            <li className='flex d-items'><FiHelpCircle size={20} /> <a href="">About Us</a></li>
+            <li className='flex d-items'><AiTwotonePhone size={20} /> <a href="">About Us</a></li>
+          </ul>
         </div>
-        )
-      }
-      <div id="model-select-container">
-        <label htmlFor="model-select">Select model:</label>
-        <select id="model-select" value={modelValue} onChange={(event) => setModelValue(event.target.value as ModelValueType)}>
-          <option value="gpt">GPT-3 (Understand and generate natural language )</option>
-          <option value="codex">Codex (Understand and generate code, including translating natural language to code)
-          </option>
-          <option value="image">Create Image (Create AI image using DALL·E models)</option>
-        </select>
-      </div>
-      <div id="input-container">
-        <PromptInput
-          prompt={prompt}
-          onSubmit={() => getGPTResult()}
-          key="prompt-input"
-          updatePrompt={(prompt) => setPrompt(prompt)}
-        />
-        <button id="submit-button" className={isLoading ? 'loading' : ''} onClick={() => getGPTResult()}></button>
+        <div className='flex-100'>
+          {!preView && 
+          <div className='box-container'>
+            <div className="box-content">
+              <h3 className='logo-name'>Harmony Ai</h3>
+              <p>Hello there! I'm an AI trained in AI development and I'm here to offer you free AI development services for a limited time. Whether you need assistance with building a custom AI model, creating a chatbot, or any other AI-related project, I'm here to help.</p>
+            </div>
+
+            <div className='flex d-col'>
+              <div className='flex gap-10'>
+                <div className='box-half'>
+                  <span className='badge'><IoFlashSharp size={20}/></span>
+                  Someone's pet dog bit me, what can I do?
+                </div>
+
+                <div className='box-half'>
+                  <span className='badge'><IoFlashSharp size={20}/></span>
+                  Someone's pet dog bit me, what can I do?
+                </div>
+              </div>
+
+
+              <div className='flex gap-10'>
+                <div className='box-half'>
+                  <span className='badge'><IoFlashSharp size={20}/></span>
+                  Someone's pet dog bit me, what can I do?
+                </div>
+
+                <div className='box-half'>
+                  <span className='badge'><IoFlashSharp size={20}/></span>
+                  Someone's pet dog bit me, what can I do?
+                </div>
+              </div>
+            </div>
+          </div>
+          }
+          <div id="response-list">
+            <PromptResponseList responseList={responseList} key="response-list"/>
+          </div>
+          { uniqueIdToRetry &&
+            (<div id="regenerate-button-container">
+              <button id="regenerate-response-button" className={isLoading ? 'loading' : ''} onClick={() => regenerateResponse()}>
+                Regenerate Response
+              </button>
+            </div>
+            )
+          }
+          <div id="model-select-container">
+            <label htmlFor="model-select">Select model:</label>
+            <select id="model-select" value={modelValue} onChange={(event) => setModelValue(event.target.value as ModelValueType)}>
+              <option value="gpt">GPT-3 (Understand and generate natural language )</option>
+              <option value="codex">Codex (Understand and generate code, including translating natural language to code)
+              </option>
+              <option value="image">Create Image (Create AI image using DALL·E models)</option>
+            </select>
+          </div>
+          <div id="input-container">
+            <PromptInput
+              prompt={prompt}
+              onSubmit={() => getGPTResult()}
+              key="prompt-input"
+              updatePrompt={(prompt) => setPrompt(prompt)}
+            />
+            <button id="submit-button" className={isLoading ? 'loading' : ''} onClick={() => getGPTResult()}></button>
+          </div>
+        </div>
       </div>
     </div>
   );

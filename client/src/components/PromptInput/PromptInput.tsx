@@ -37,6 +37,7 @@ const PromptInput: React.FC<PromptInputProps> = ({ prompt, onSubmit, updatePromp
       disabled={false}
       id="prompt-input"
       className="prompt-input"
+      placeholder="Send Message"
       onChange={(event) => updatePrompt(event.target.value)}
     />
   );
