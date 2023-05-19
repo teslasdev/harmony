@@ -22,7 +22,7 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 .header-box {
-  height: 10%;
+  height: 8%;
 }
 .header {
   background-color: rgba(0, 0, 0, 1);
@@ -76,12 +76,12 @@ body {
   height: 100%;
 }
 .editor-box {
-  height: 80%;
+  height: 77%;
   overflow: auto;
 }
 
 .prompt-box {
-  height: 20%;
+  height: 15%;
   width: 100%;
   display: flex;
   justify-content: center;
