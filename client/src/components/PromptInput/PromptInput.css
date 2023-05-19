@@ -8,6 +8,10 @@
     overflow: auto;
 }
 
+.prompt-response-list {
+    width: 100%;
+}
+
 #prompt-input:focus {
     outline: none !important;
 }

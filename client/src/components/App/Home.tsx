@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import axios from "axios";
 import PromptInput from "../PromptInput/PromptInput";
 import './App.css';
@@ -19,6 +19,14 @@ const Home = () => {
   const [modelValue, setModelValue] = useState<ModelValueType>('gpt');
   const [isLoading, setIsLoading] = useState(false);
   let loadInterval: number | undefined;
+ 
+  const containerRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const container = containerRef.current;
+    if (container) {
+      container.scrollTop = container.scrollHeight;
+    }
+  }, []);
 
   const generateUniqueId = () => {
     const timestamp = Date.now();
@@ -114,9 +122,8 @@ const Home = () => {
     }
 
     try {
-      const Base_URL = process.env.REACT_APP_BACKEND_URL
       // Send a POST request to the API with the prompt in the request body
-      const response = await axios.post(Base_URL + 'get-prompt-result', {
+      const response = await axios.post('get-prompt-result', {
         prompt: _prompt,
         model: modelValue
       });
@@ -130,7 +137,6 @@ const Home = () => {
           response: response.data.trim(),
         });
       }
-
       setPromptToRetry(null);
       setUniqueIdToRetry(null);
     } catch (err) {
@@ -207,8 +213,8 @@ const Home = () => {
               </div>
             </div>
             }
-            <div id="response-list">
-            <PromptResponseList responseList={responseList} key="response-list"/>
+            <div ref={containerRef} id="response-list">
+            <PromptResponseList responseList={responseList}  key="response-list"/>
             </div>
             { uniqueIdToRetry &&
               (<div id="regenerate-button-container">

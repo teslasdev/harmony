@@ -164,9 +164,18 @@ body {
 /* Remove border color from the response list container */
 #response-list {
   border: none;
-  overflow: auto;
+  height: 100%;
   flex: 1;
   width: 100%;
+  display: flex;
+  align-items: flex-end;
+  overflow-y: scroll;
+  position: relative;
+}
+
+.prompt-response-list  {
+  position: absolute;
+  bottom: 0;
 }
 
 .chatgpt-response {

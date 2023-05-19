@@ -15,11 +15,15 @@ app.use('/', express.static(__dirname + '/frontend')); // Serves resources from 
 app.post('/get-prompt-result', async (req, res) => {
     // Get the prompt from the request body
     const {prompt, model = 'gpt'} = req.body;
-
+    const defaultText = ["hello" , "hi" , "hi" , "hii" , "hiiiiii" , "how fa" , "helo" , "hlo" , "hey"]
     // Check if prompt is present in the request
     if (!prompt) {
         // Send a 400 status code and a message indicating that the prompt is missing
         return res.status(400).send({error: 'Prompt is missing in the request'});
+    }
+
+    else if(defaultText.includes(prompt.toLowerCase())) {
+        return res.send("Hello, How can I assit you today with our creative Ai?");
     }
 
     try {
@@ -35,10 +39,11 @@ app.post('/get-prompt-result', async (req, res) => {
         }
         const completion = await openai.createCompletion({
             model: model === 'gpt' ? "text-davinci-003" : 'code-davinci-002', // model name
-            prompt: `Please reply below question in markdown format.\n ${prompt}`, // input prompt
+            prompt: prompt, // input prompt
             max_tokens: model === 'gpt' ? 4000 : 8000 // Use max 8000 tokens for codex model
         });
         // Send the generated text as the response
+        console.log(completion.data.choices[0])
         return res.send(completion.data.choices[0].text);
     } catch (error) {
         const errorMsg = error.response ? error.response.data.error : `${error}`;
