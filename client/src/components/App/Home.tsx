@@ -114,8 +114,9 @@ const Home = () => {
     }
 
     try {
+      const Base_URL = process.env.REACT_APP_BACKEND_URL
       // Send a POST request to the API with the prompt in the request body
-      const response = await axios.post('get-prompt-result', {
+      const response = await axios.post(Base_URL + 'get-prompt-result', {
         prompt: _prompt,
         model: modelValue
       });
