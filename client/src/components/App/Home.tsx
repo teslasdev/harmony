@@ -128,7 +128,7 @@ const Home = () => {
         model: modelValue
       });
 
-      setHeight('100%')
+      setHeight('80%')
       if (modelValue === 'image') {
         // Show image for `Create image` model
         updateResponse(uniqueId, {
