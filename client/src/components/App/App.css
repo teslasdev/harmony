@@ -50,7 +50,7 @@ body {
 .content-box {
   display: flex;
   position: relative;
-  height: 90%;
+  height: 92%;
 }
 
 .flex {
@@ -76,7 +76,7 @@ body {
   height: 100%;
 }
 .editor-box {
-  height: 77%;
+  height: 85%;
   overflow: auto;
 }
 
