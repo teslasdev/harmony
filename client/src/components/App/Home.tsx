@@ -19,7 +19,7 @@ const Home = () => {
   const [modelValue, setModelValue] = useState<ModelValueType>('gpt');
   const [isLoading, setIsLoading] = useState(false);
   let loadInterval: number | undefined;
- 
+  const [height, setHeight] = useState<string>('ok')
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const container = containerRef.current;
@@ -127,6 +127,8 @@ const Home = () => {
         prompt: _prompt,
         model: modelValue
       });
+
+      setHeight('100%')
       if (modelValue === 'image') {
         // Show image for `Create image` model
         updateResponse(uniqueId, {
@@ -213,7 +215,7 @@ const Home = () => {
               </div>
             </div>
             }
-            <div ref={containerRef} id="response-list">
+            <div ref={containerRef} id="response-list" style={{ height:`${height}`}}>
             <PromptResponseList responseList={responseList}  key="response-list"/>
             </div>
             { uniqueIdToRetry &&
