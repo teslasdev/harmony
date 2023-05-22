@@ -19,7 +19,7 @@ const Home = () => {
   const [modelValue, setModelValue] = useState<ModelValueType>('gpt');
   const [isLoading, setIsLoading] = useState(false);
   let loadInterval: number | undefined;
-  const [height, setHeight] = useState<string>('ok')
+  const [height, setHeight] = useState<string>('0%')
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const container = containerRef.current;
@@ -94,6 +94,10 @@ const Home = () => {
     await getGPTResult(promptToRetry, uniqueIdToRetry);
   }
 
+  const handleClick = async (value : string) => {
+    await getGPTResult(value);
+  }
+
   const getGPTResult = async (_promptToRetry?: string | null, _uniqueIdToRetry?: string | null) => {
     // Get the prompt input
     const _prompt = _promptToRetry ?? htmlToText(prompt);
@@ -157,6 +161,7 @@ const Home = () => {
   }
 
 
+
   const [isOpen, setOpen] = useState(true)
 
   return (
@@ -166,7 +171,7 @@ const Home = () => {
           <div className='pr-4 d-mobile' onClick={() => setOpen(!isOpen)}>
             <FaBars color="white" size={20} />
           </div>
-          <h3 className='logo-name'>Harmony Ai</h3>
+          <h3 className='logo-name'>Harmon(y) Ai</h3>
         </header>
       </div>
       <div className='content-box'>
@@ -183,34 +188,34 @@ const Home = () => {
             {!preView && 
             <div className='box-container'>
               <div className="box-content">
-                <h3 className='logo-name'>Harmony Ai</h3>
+                <h3 className='logo-name'>Harmon(y) Ai</h3>
                 <p>Hello there! I'm an AI trained in AI development and I'm here to offer you free AI development services for a limited time. Whether you need assistance with building a custom AI model, creating a chatbot, or any other AI-related project, I'm here to help.</p>
               </div>
 
               <div className='flex box-content-sub'>
-                <div className='flex gap-10'>
-                  <div className='box-half'>
+                <div className='flex gap-10 justify-between'>
+                  <button className={isLoading ? 'box-half loading' : 'box-half'}  onClick={() => handleClick('Are there any hidden costs or obligations associated with the free services')}>
                     <span className='badge'><IoFlashSharp size={20}/></span>
                     Are there any hidden costs or obligations associated with the free services
-                  </div>
+                  </button>
 
-                  <div className='box-half'>
+                  <button className={isLoading ? 'box-half loading' : 'box-half'}  onClick={() => handleClick('What is the typical turnaround time for completing an AI project')}>
                     <span className='badge'><IoFlashSharp size={20}/></span>
                     What is the typical turnaround time for completing an AI project
-                  </div>
+                  </button>
                 </div>
 
 
-                <div className='flex gap-10'>
-                  <div className='box-half'>
+                <div className='flex gap-10 justify-between'>
+                  <button className={isLoading ? 'box-half loading' : 'box-half'}  onClick={() => handleClick('Who is eligible for the free AI development services')}>
                     <span className='badge'><IoFlashSharp size={20}/></span>
                     Who is eligible for the free AI development services
-                  </div>
+                  </button>
 
-                  <div className='box-half'>
+                  <button className={isLoading ? 'box-half loading' : 'box-half'}  onClick={() => handleClick('What types of AI projects do you support')}>
                     <span className='badge'><IoFlashSharp size={20}/></span>
                     What types of AI projects do you support
-                  </div>
+                  </button>
                 </div>
               </div>
             </div>

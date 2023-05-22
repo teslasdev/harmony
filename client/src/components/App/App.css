@@ -87,6 +87,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding-bottom: 1rem;
 }
 
 
@@ -143,7 +144,15 @@ body {
   padding: 1.2rem;
   font-size: 13px;
   position: relative;
+  cursor: pointer;
+  border: none;
+
 }
+
+.justify-between {
+  justify-content: space-between;
+  width: 100%;
+} 
 .pr-4 {
   padding: 1rem;
 }
