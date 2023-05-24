@@ -93,14 +93,10 @@ const Home = () => {
   const regenerateResponse = async () => {
     await getGPTResult(promptToRetry, uniqueIdToRetry);
   }
-
-  const handleClick = async (value : string) => {
-    await getGPTResult(value);
-  }
-
   const getGPTResult = async (_promptToRetry?: string | null, _uniqueIdToRetry?: string | null) => {
     // Get the prompt input
     const _prompt = _promptToRetry ?? htmlToText(prompt);
+    setHeight('100%')
 
     // If a response is already being generated or the prompt is empty, return
     if (isLoading || !_prompt) {
@@ -132,7 +128,6 @@ const Home = () => {
         model: modelValue
       });
 
-      setHeight('100%')
       if (modelValue === 'image') {
         // Show image for `Create image` model
         updateResponse(uniqueId, {
@@ -194,12 +189,12 @@ const Home = () => {
 
               <div className='flex box-content-sub'>
                 <div className='flex gap-10 justify-between'>
-                  <button className={isLoading ? 'box-half loading' : 'box-half'}  onClick={() => handleClick('Are there any hidden costs or obligations associated with the free services')}>
+                  <button className='box-half'  onClick={() => setPrompt('Are there any hidden costs or obligations associated with the free services')}>
                     <span className='badge'><IoFlashSharp size={20}/></span>
                     Are there any hidden costs or obligations associated with the free services
                   </button>
 
-                  <button className={isLoading ? 'box-half loading' : 'box-half'}  onClick={() => handleClick('What is the typical turnaround time for completing an AI project')}>
+                  <button className='box-half'  onClick={() => setPrompt('What is the typical turnaround time for completing an AI project')}>
                     <span className='badge'><IoFlashSharp size={20}/></span>
                     What is the typical turnaround time for completing an AI project
                   </button>
@@ -207,12 +202,12 @@ const Home = () => {
 
 
                 <div className='flex gap-10 justify-between'>
-                  <button className={isLoading ? 'box-half loading' : 'box-half'}  onClick={() => handleClick('Who is eligible for the free AI development services')}>
+                  <button className='box-half'  onClick={() => setPrompt('Who is eligible for the free AI development services')}>
                     <span className='badge'><IoFlashSharp size={20}/></span>
                     Who is eligible for the free AI development services
                   </button>
 
-                  <button className={isLoading ? 'box-half loading' : 'box-half'}  onClick={() => handleClick('What types of AI projects do you support')}>
+                  <button className='box-half' onClick={() => setPrompt('What types of AI projects do you support')}>
                     <span className='badge'><IoFlashSharp size={20}/></span>
                     What types of AI projects do you support
                   </button>
