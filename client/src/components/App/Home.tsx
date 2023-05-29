@@ -6,6 +6,7 @@ import {ResponseInterface} from "../PromptResponseList/response-interface";
 import PromptResponseList from "../PromptResponseList/PromptResponseList";
 import {IoFlashSharp} from 'react-icons/io5'
 import {FaBars} from 'react-icons/fa'
+import {BiRefresh} from 'react-icons/bi'
 import Navigation from './Navigation';
 
 type ModelValueType = 'gpt' | 'codex' | 'image';
@@ -21,12 +22,7 @@ const Home = () => {
   let loadInterval: number | undefined;
   const [height, setHeight] = useState<string>('0%')
   const containerRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const container = containerRef.current;
-    if (container) {
-      container.scrollTop = container.scrollHeight;
-    }
-  }, []);
+ 
 
   const generateUniqueId = () => {
     const timestamp = Date.now();
@@ -91,6 +87,7 @@ const Home = () => {
   }
 
   const regenerateResponse = async () => {
+    console.log(prompt)
     await getGPTResult(promptToRetry, uniqueIdToRetry);
   }
   const getGPTResult = async (_promptToRetry?: string | null, _uniqueIdToRetry?: string | null) => {
@@ -135,7 +132,7 @@ const Home = () => {
         });
       } else {
         updateResponse(uniqueId, {
-          response: response.data.trim(),
+          response: response.data.slice(),
         });
       }
       setPromptToRetry(null);
@@ -156,6 +153,12 @@ const Home = () => {
   }
 
 
+  const handleBack = () => {
+    setPreview(false);
+    setResponseList([])
+    setHeight('0%')
+  }
+
 
   const [isOpen, setOpen] = useState(true)
 
@@ -172,11 +175,11 @@ const Home = () => {
       <div className='content-box'>
         {!isOpen && 
           <div className='bg-absolute-black'>
-            <Navigation />
+            <Navigation handleClick={handleBack} />
           </div>
         }
         <div className='flex-10 sidebar d-sm-none'>
-          <Navigation />
+          <Navigation handleClick={handleBack} />
         </div>
         <div className='flex-100'>
           <div className='editor-box'>
@@ -189,12 +192,12 @@ const Home = () => {
 
               <div className='flex box-content-sub'>
                 <div className='flex gap-10 justify-between'>
-                  <button className='box-half'  onClick={() => setPrompt('Are there any hidden costs or obligations associated with the free services')}>
+                  <button className='box-half'  onClick={() => setPrompt('Are there any hidden costs or obligations associated with the free services ?')}>
                     <span className='badge'><IoFlashSharp size={20}/></span>
                     Are there any hidden costs or obligations associated with the free services
                   </button>
 
-                  <button className='box-half'  onClick={() => setPrompt('What is the typical turnaround time for completing an AI project')}>
+                  <button className='box-half'  onClick={() => setPrompt('What is the typical turnaround time for completing an AI project ?')}>
                     <span className='badge'><IoFlashSharp size={20}/></span>
                     What is the typical turnaround time for completing an AI project
                   </button>
@@ -202,12 +205,12 @@ const Home = () => {
 
 
                 <div className='flex gap-10 justify-between'>
-                  <button className='box-half'  onClick={() => setPrompt('Who is eligible for the free AI development services')}>
+                  <button className='box-half'  onClick={() => setPrompt('Who is eligible for the free AI development services ?')}>
                     <span className='badge'><IoFlashSharp size={20}/></span>
                     Who is eligible for the free AI development services
                   </button>
 
-                  <button className='box-half' onClick={() => setPrompt('What types of AI projects do you support')}>
+                  <button className='box-half' onClick={() => setPrompt('What types of AI projects do you support ?')}>
                     <span className='badge'><IoFlashSharp size={20}/></span>
                     What types of AI projects do you support
                   </button>
@@ -215,28 +218,19 @@ const Home = () => {
               </div>
             </div>
             }
-            <div ref={containerRef} id="response-list" style={{ height:`${height}`}}>
+            {uniqueIdToRetry && (
+            <div id="regenerate-button-container">
+              <button id="regenerate-response-button" className={isLoading ? 'loading' : ''} onClick={() => regenerateResponse()}>
+                <BiRefresh />
+                Regenerate Response
+              </button>
+            </div>
+            )}
+            <div id="response-list" style={{ height:`${height}`}}>
             <PromptResponseList responseList={responseList}  key="response-list"/>
             </div>
-            { uniqueIdToRetry &&
-              (<div id="regenerate-button-container">
-                <button id="regenerate-response-button" className={isLoading ? 'loading' : ''} onClick={() => regenerateResponse()}>
-                  Regenerate Response
-                </button>
-              </div>
-              )
-            }
           </div>
           <div className='prompt-box'>
-            <div id="model-select-container">
-              <label htmlFor="model-select">Select model:</label>
-              <select id="model-select" value={modelValue} onChange={(event) => setModelValue(event.target.value as ModelValueType)}>
-                <option value="gpt">GPT-3 (Understand and generate natural language )</option>
-                <option value="codex">Codex (Understand and generate code, including translating natural language to code)
-                </option>
-                <option value="image">Create Image (Create AI image using DALL·E models)</option>
-              </select>
-            </div>
             <div id="input-container">
               <PromptInput
                 prompt={prompt}
@@ -245,6 +239,15 @@ const Home = () => {
                 updatePrompt={(prompt) => setPrompt(prompt)}
               />
               <button id="submit-button" className={isLoading ? 'loading' : ''} onClick={() => getGPTResult()}></button>
+            </div>
+            <div id="model-select-container">
+              <label htmlFor="model-select">Select model:</label>
+              <select id="model-select" value={modelValue} onChange={(event) => setModelValue(event.target.value as ModelValueType)}>
+                <option value="gpt">GPT-3 (Understand and generate natural language )</option>
+                <option value="codex">Codex (Understand and generate code, including translating natural language to code)
+                </option>
+                <option value="image">Create Image (Create AI image using DALL·E models)</option>
+              </select>
             </div>
           </div>
         </div>

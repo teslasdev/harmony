@@ -2,9 +2,9 @@
 .response-container {
     margin-bottom: 10px;
     color: white;
-    padding: 15px 50px;
-    font-size: 1rem;
+    padding: 15px 10px;
     display: flex;
+    font-size: 15px;
 }
 
 .response-container .avatar-image {
@@ -26,7 +26,7 @@
 
 .response-container .prompt-content {
     background: transparent !important;
-    color: black;
+    color: #374151;
     padding: 0 !important;
     margin-top: 5px;
 }
@@ -68,3 +68,10 @@
 .hljs-link, .hljs-operator, .hljs-regexp, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-symbol, .hljs-template-variable, .hljs-variable {
     color: white !important;
 }
+
+
+@media (max-width:900px) {
+    .response-container .prompt-content {
+        line-height: 2rem;
+    }
+  }
