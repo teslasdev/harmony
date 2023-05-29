@@ -24,6 +24,7 @@ body {
 }
 .header-box {
   height: 8%;
+  position: fixed;
 }
 .header {
   background-color: rgba(0, 0, 0, 1);
@@ -79,7 +80,7 @@ body {
 }
 .editor-box {
   height: 85%;
-  overflow: auto;
+  overflow-y: scroll;
   font-size: 15px;
 }
 
@@ -92,6 +93,7 @@ body {
   flex-direction: column;
   border-top: 1px solid rgba(0, 0, 0, 0.03);
   background-color: rgba(0, 0, 0, 0.02);
+  position: fixed;
 }
 
 
