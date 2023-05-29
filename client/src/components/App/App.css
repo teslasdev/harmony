@@ -79,9 +79,12 @@ body {
   height: 100%;
 }
 .editor-box {
-  height: 85%;
+  height: 77%;
   overflow-y: scroll;
   font-size: 15px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .prompt-box {
