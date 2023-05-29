@@ -230,7 +230,9 @@ const Home = () => {
             <PromptResponseList responseList={responseList}  key="response-list"/>
             </div>
           </div>
-          <div className='prompt-box'>
+        </div>
+      </div>
+      <div className='prompt-box'>
             <div id="input-container">
               <PromptInput
                 prompt={prompt}
@@ -250,8 +252,6 @@ const Home = () => {
               </select>
             </div>
           </div>
-        </div>
-      </div>
     </div>
   );
 }
