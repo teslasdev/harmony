@@ -218,20 +218,20 @@ const Home = () => {
               </div>
             </div>
             }
-            {uniqueIdToRetry && (
-            <div id="regenerate-button-container">
-              <button id="regenerate-response-button" className={isLoading ? 'loading' : ''} onClick={() => regenerateResponse()}>
-                <BiRefresh />
-                Regenerate Response
-              </button>
-            </div>
-            )}
             <div id="response-list" style={{ height:`${height}`}}>
             <PromptResponseList responseList={responseList}  key="response-list"/>
             </div>
           </div>
         </div>
       </div>
+      {uniqueIdToRetry && (
+            <div id="regenerate-button-container">
+              <button id="regenerate-response-button" className={isLoading ? 'loading' : ''} onClick={() => regenerateResponse()}>
+                <BiRefresh />
+                Regenerate Response
+              </button>
+            </div>
+        )}
       <div className='prompt-box'>
             <div id="input-container">
               <PromptInput

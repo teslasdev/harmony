@@ -249,7 +249,7 @@ body {
   justify-content: center;
   margin-bottom: 10px;
   position: absolute;
-  bottom: -30%;
+  bottom: 15%;
   left: 50%;
   cursor: pointer;
   z-index: 100;
@@ -375,6 +375,5 @@ body {
   }
   #regenerate-button-container {
     transform: translateX(-50%);
-    bottom: -10%;
   }
 }
