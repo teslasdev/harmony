@@ -73,5 +73,6 @@
 @media (max-width:900px) {
     .response-container .prompt-content {
         line-height: 2rem;
+        font-size: 14px;
     }
   }
