@@ -249,16 +249,15 @@ body {
   justify-content: center;
   margin-bottom: 10px;
   position: absolute;
-  bottom: 15%;
+  bottom: -30%;
   left: 50%;
   cursor: pointer;
   z-index: 100;
-  background-color: #fff;
 }
 
 #regenerate-response-button {
   border: none;
-  background: transparent;
+  background: #fff;
   border: 1px solid rgba(0, 0, 0, .1);
   border-radius: 4px;
   padding: 10px 20px;
@@ -376,6 +375,6 @@ body {
   }
   #regenerate-button-container {
     transform: translateX(-50%);
-    bottom: 15%;
+    bottom: -10%;
   }
 }
