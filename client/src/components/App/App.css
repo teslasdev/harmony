@@ -340,8 +340,11 @@ body {
   }
 
   .box-half {
-    font-size: 13px;
+    font-size: 12px;
     width: 50%;
+    line-height: 1rem;
+    font-family: "Poppins";
+    padding: 1rem;
   }
   #input-container {
     width: 90%;
