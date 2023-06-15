@@ -26,9 +26,9 @@ const PromptResponseList: FC<PromptResponseListProps> = ({ responseList }) => {
       {responseList.map((responseData) => (
         <div className={"response-container " + (responseData.selfFlag ? 'my-question' : 'chatgpt-response')} key={responseData.id}>
           <img className="avatar-image" src={responseData.selfFlag ? MyImg : ChatGptImg} alt="avatar"/>
-          <div className={(responseData.error ? 'error-response ' : '') + "prompt-content"} id={responseData.id}>
+          <div className={(responseData.error ? 'error-response ' : '') + "prompt-content"} style={{width:"100%" , height: "100%"}} id={responseData.id}>
             { responseData.image &&
-                <img src={responseData.image} className="ai-image" alt="generated ai"/>
+                <img src={responseData.image} className="ai-image" style={{width:"100%" , height: "100%"}}  alt="generated ai"/>
             }
             { responseData.response &&
               <ReactMarkdown

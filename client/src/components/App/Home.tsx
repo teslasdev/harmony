@@ -246,8 +246,8 @@ const Home = () => {
               <label htmlFor="model-select">Select model:</label>
               <select id="model-select" value={modelValue} onChange={(event) => setModelValue(event.target.value as ModelValueType)}>
                 <option value="gpt">GPT-3 (Understand and generate natural language )</option>
-                <option value="codex">Codex (Understand and generate code, including translating natural language to code)
-                </option>
+                {/* <option value="codex">Codex (Understand and generate code, including translating natural language to code)
+                </option> */}
                 <option value="image">Create Image (Create AI image using DALL·E models)</option>
               </select>
             </div>

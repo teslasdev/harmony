@@ -1,4 +1,5 @@
 const express = require('express');
+const {Configuration, OpenAIApi} = require("openai");
 const app = express();
 const cors = require('cors');
 require("dotenv").config();
@@ -6,12 +7,15 @@ const { OpenAI } = require("langchain/llms/openai");
 const  { BufferMemory } = require("langchain/memory");
 const { ConversationChain } = require("langchain/chains");
 const {
-    SystemMessagePromptTemplate,
     HumanMessagePromptTemplate,
     ChatPromptTemplate,
     MessagesPlaceholder,
   } = require("langchain/prompts");
 const chat = new OpenAI({ openAIApiKey: process.env.OPENAI_API_KEY , temperature: 0 , maxTokens: 1000 });
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new OpenAIApi(configuration);
 app.use(cors());
 app.use(express.json());
 app.use('/', express.static(__dirname + '/frontend')); // Serves resources from client folder
@@ -31,6 +35,14 @@ app.post('/get-prompt-result', async (req, res) => {
     }
 
     try {
+          if (model === 'image') {
+            const result = await openai.createImage({
+                prompt,
+                response_format: 'url',
+                size: '512x512'
+            });
+            return res.send(result.data.data[0].url);
+        }
         const chatPrompt = ChatPromptTemplate.fromPromptMessages([
             new MessagesPlaceholder("history"),
             HumanMessagePromptTemplate.fromTemplate("{input}"),
